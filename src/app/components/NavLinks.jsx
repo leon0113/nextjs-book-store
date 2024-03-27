@@ -1,3 +1,7 @@
+'use client'
+import { useContext } from "react";
+import { StoreContext } from "../context";
+
 import {
     HomeIcon,
     UserGroupIcon,
@@ -21,7 +25,9 @@ const links = [
 
 
 export default function NavLinks() {
-    // const {cartData} = useContext(StoreContext);
+    const { cartData } = useContext(StoreContext);
+    // const { cartData, setCartData } = useContext(StoreContext);
+    // console.log(cartData);
     return (
         <>
             {
@@ -35,7 +41,8 @@ export default function NavLinks() {
                         >
                             <IconComponent className="w-6" />
                             <p className="hidden md:block">
-                                {link.name}
+                                {(link.name === 'Cart' && cartData && cartData.length > 0)
+                                    ? `${link.name}(${cartData.length})` : `${link.name}`}
                             </p>
                         </Link>
                     )
